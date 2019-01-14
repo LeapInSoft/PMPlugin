@@ -57,10 +57,10 @@ class MainClass extends PluginBase implements Listener{
 		if ($event->getNewState()->getId() == Block::COBBLESTONE) {
 			$event->setCancelled(true);
 
-			$currentBlock = $event->getBlock();
-			$level = $currentBlock->getLevel();
-			$level->setBlock($currentBlock, BlockFactory::get(Block::DIAMOND_ORE));
-			$level->addSound($currentBlock->add(0.5, 0.5, 0.5), new FizzSound(2.6 + (lcg_value() - lcg_value()) * 0.8));
+			//$currentBlock = $event->getBlock();
+			//$level = $currentBlock->getLevel();
+			//$level->setBlock($currentBlock, BlockFactory::get(Block::DIAMOND_ORE));
+			//$level->addSound($currentBlock->add(0.5, 0.5, 0.5), new FizzSound(2.6 + (lcg_value() - lcg_value()) * 0.8));
 		}
 	}
 }
