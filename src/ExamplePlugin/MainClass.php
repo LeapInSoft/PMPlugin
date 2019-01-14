@@ -62,7 +62,8 @@ class MainClass extends PluginBase implements Listener{
 			$currentBlock = $event->getBlock();
 			$level = $currentBlock->getLevel();
 			$level->setBlock($currentBlock, BlockFactory::get(Block::DIAMOND_ORE));
-			$level->addSound($currentBlock->add(0.5, 0.5, 0.5), new FizzSound(2.6 + (lcg_value() - lcg_value()) * 0.8));
+			//$level->addSound($currentBlock->add(0.5, 0.5, 0.5), new FizzSound(2.6 + (lcg_value() - lcg_value()) * 0.8));
+			$level->addSound(new FizzSound($currentBlock->add(0.5, 0.5, 0.5), 2.6 + (lcg_value() - lcg_value()) * 0.8));
 		}
 	}
 }
