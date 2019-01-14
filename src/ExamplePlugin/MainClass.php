@@ -13,6 +13,8 @@ use pocketmine\utils\TextFormat;
 use pocketmine\event\block\BlockFormEvent;
 use pocketmine\block\BlockFactory;
 use pocketmine\level\sound\FizzSound;
+use pocketmine\block\Block;
+
 use function lcg_value;
 
 class MainClass extends PluginBase implements Listener{
