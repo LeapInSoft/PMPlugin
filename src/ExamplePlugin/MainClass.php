@@ -11,6 +11,9 @@ use pocketmine\event\player\PlayerRespawnEvent;
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\TextFormat;
 use pocketmine\event\block\BlockFormEvent;
+use pocketmine\block\BlockFactory;
+use pocketmine\level\sound\FizzSound;
+use function lcg_value;
 
 class MainClass extends PluginBase implements Listener{
 
@@ -20,7 +23,7 @@ class MainClass extends PluginBase implements Listener{
 
 	public function onEnable() : void{
 		$this->getServer()->getPluginManager()->registerEvents($this, $this);
-		$this->getScheduler()->scheduleRepeatingTask(new BroadcastTask($this->getServer()), 120);
+		//$this->getScheduler()->scheduleRepeatingTask(new BroadcastTask($this->getServer()), 120);
 		$this->getLogger()->info(TextFormat::DARK_GREEN . "I've been enabled!");
 	}
 
@@ -50,6 +53,14 @@ class MainClass extends PluginBase implements Listener{
 	}
 
 	public function onBlockFormEvent(BlockFormEvent $event) : void {
-		$this->getServer()->broadcastMessage("Generating : " . $event->getNewState()->getName());
+		$this->getServer()->broadcastMessage("Try Generating : " . $event->getNewState()->getName());
+		if ($event->getNewState()->getId() == Block::COBBLESTONE) {
+			$event->setCancelled(true);
+
+			$currentBlock = $event->getBlock();
+			$level = $currentBlock->getLevel();
+			$level->setBlock($currentBlock, BlockFactory::get(Block::DIAMOND_ORE));
+			$level->addSound($currentBlock->add(0.5, 0.5, 0.5), new FizzSound(2.6 + (lcg_value() - lcg_value()) * 0.8));
+		}
 	}
 }
